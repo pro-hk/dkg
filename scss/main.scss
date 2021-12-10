@@ -20,18 +20,31 @@
       text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
       &:after {
         content: "";
-        display: none;
         position: absolute;
         left: -10px;
         right: -10px;
         height: 10px;
         bottom: 10px;
-        background-color: #f00;
+        transform-origin: 0 50%;
+        // background-color: #f00;
         border-radius: 100px;
+        transform: 0 50%;
         z-index: -1;
       }
     }
   }
+}
+#happen .titleBox strong:after {
+  background-color: #f00;
+}
+#business .titleBox strong:after {
+  background-color: #0f0;
+}
+#portfolio .titleBox strong:after {
+  background-color: #00f;
+}
+#community .titleBox strong:after {
+  background-color: #ff0;
 }
 
 #main {
@@ -52,12 +65,132 @@
     }
     &#business {
       background-image: url(../images/main/bgBusiness.jpg);
+      .listBox {
+        margin-top: 80px;
+        ul {
+          display: flex;
+          justify-content: center;
+          li a {
+            width: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .icon {
+              @include box(100px);
+              @include flexCenter();
+              background-color: rgba(255, 255, 255, 0.5);
+              border-radius: 100%;
+            }
+            .txt {
+              width: 200px;
+              dt {
+                margin: 30px 0;
+                font-size: 20px;
+                font-weight: 500;
+              }
+              dd {
+                line-height: 1.5;
+              }
+            }
+          }
+        }
+      }
     }
     &#portfolio {
       background-image: url(../images/main/bgPortfolio.png);
+      .listBox {
+        width: 1350px;
+        margin: 50px auto 0;
+        position: relative;
+        .mask {
+          width: 1200px;
+          margin: auto;
+          overflow: hidden;
+          ul {
+            li {
+              &:hover .img:after {
+                border: 10px solid $white-color;
+              }
+              .img {
+                position: relative;
+                &:after {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  left: 0;
+                  top: 0;
+                  right: 0;
+                  bottom: 0;
+                  border: 0 solid $white-color;
+                  transition: 0.25s;
+                }
+              }
+              img {
+                width: 100%;
+                height: 250px;
+                object-fit: cover;
+              }
+              p {
+                text-align: center;
+                margin-top: 30px;
+              }
+            }
+          }
+        }
+        button {
+          position: absolute;
+          top: 30%;
+          span {
+            color: $white-color;
+            font-size: 48px;
+          }
+          &.prev {
+            left: 0;
+          }
+          &.next {
+            right: 0;
+          }
+        }
+        .pagination {
+          text-align: center;
+          margin-top: 50px;
+          .swiper-pagination-bullet {
+            width: 14px;
+            height: 14px;
+            opacity: 1;
+            background-color: transparent;
+            border: 4px solid $white-color;
+            &-active {
+              background-color: $white-color;
+            }
+          }
+        }
+      }
     }
     &#community {
       background-image: url(../images/main/bgCommunity.jpg);
+      .listBox {
+        margin-top: 100px;
+        ul {
+          display: flex;
+          justify-content: center;
+          li {
+            margin: 0 10px;
+            a {
+              @include flexCenter();
+              @include box(200px, 60px);
+              border: 2px solid $white-color;
+              border-radius: 100px;
+              transition: 0.25s;
+              &:hover {
+                background-color: $white-color;
+                color: #111;
+              }
+            }
+          }
+        }
+      }
     }
     &#footer {
       background-color: $white-color;
