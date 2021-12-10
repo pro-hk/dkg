@@ -74,9 +74,9 @@ businessTl
     duration: 1,
   });
 
-const portfolio = gsap.timeline();
-portfolio.pause();
-portfolio
+const portfolioTl = gsap.timeline();
+portfolioTl.pause();
+portfolioTl
   .from("#portfolio .titleBox h2 .char", {
     opacity: 0,
     x: 100,
@@ -111,9 +111,9 @@ portfolio
     duration: 1,
   });
 
-const community = gsap.timeline();
-community.pause();
-community
+const communityTl = gsap.timeline();
+communityTl.pause();
+communityTl
   .from("#community .titleBox h2 .char", {
     opacity: 0,
     x: 100,
@@ -150,8 +150,13 @@ community
 
 $("#main").fullpage({
   // scrollBar: true,
+  navigation: true,
+  navigationTooltips: ["INTRODUCE", "BUSINESS", "PORTFOLIO", "COMMUNITY"],
+  showActiveTooltip: true,
+
   onLeave: function (origin, destination, direction) {
     const leavingSection = this;
+    console.log(direction);
     switch (destination.index) {
       case 0:
         happenTl.restart();
@@ -160,10 +165,17 @@ $("#main").fullpage({
         businessTl.restart();
         break;
       case 2:
-        portfolio.restart();
+        portfolioTl.restart();
         break;
       case 3:
-        community.restart();
+        if (direction === "down") {
+          communityTl.restart();
+        } else {
+          $("#fp-nav").removeClass("last");
+        }
+        break;
+      case 4:
+        $("#fp-nav").addClass("last");
         break;
       default:
         console.log("이제 없어요");
@@ -195,3 +207,5 @@ const portfolioSlider = new Swiper("#portfolio .mask", {
     clickable: true,
   },
 });
+
+$("#fp-nav ul li:last-child").remove();
